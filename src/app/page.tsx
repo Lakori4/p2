@@ -25,25 +25,28 @@ export default function Home() {
  const filter = countries?.filter((country)=>(country.name.common.toLowerCase().includes(busqueda.toLowerCase())))
 
   return (
-    <div>
+    <div className="main">
 
-      <h1>Explorador de Países</h1>
+      <h1 className="title">Explorador de Países</h1>
       
-      <input 
-        type="text" 
-        placeholder="Buscar un país..." 
-        value={busqueda} 
-        onChange={(e) => setBusqueda(e.target.value)} 
-      />
+      <div className="searchContainer">
+        <input 
+          type="text" 
+          placeholder="Buscar un país..." 
+          value={busqueda} 
+          onChange={(e) => setBusqueda(e.target.value)} 
+          className="searchInput"
+        />
+      </div>
 
-      <div>
+      <div className="grid">
         
         {loading ? (
-          <p>Cargando países...</p>
+          <p className="loading">Cargando países...</p>
         ) : error ? (
-          <p>Error: {error}</p>
+          <p className="error">Error: {error}</p>
         ) : filter?.length === 0 ? (
-          <p>No se encontraron resultados.</p>
+          <p className="noResults">No se encontraron resultados.</p>
         ) : (
           filter?.map((country)=>(
             <CountryCard key={country.name.common} country={country}></CountryCard>

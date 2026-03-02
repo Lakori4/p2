@@ -1,8 +1,12 @@
+import { api, getAllCountries, getCountryByName } from "@/lib/api";
+import { Country } from "@/lib/types";
 
-export default function Home() {
+export default async function Home() {
 
 
-  
+  const countries: Country []|null = await getCountryByName("Republic")
+
+  console.log(countries)
 
 
   return (

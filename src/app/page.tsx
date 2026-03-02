@@ -62,7 +62,7 @@ export default function Home() {
           className="searchInput"
         />
 
-        <button onClick={() => setSearch(!search)}>Buscar</button>
+        <button className="searchButton" onClick={() => setSearch(!search)}>Buscar</button>
       </div>
 
       <div className="grid">

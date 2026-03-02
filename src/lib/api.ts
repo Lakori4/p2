@@ -19,7 +19,8 @@ export const getAllCountries = async (): Promise<Country[]> => {
 
 export const getCountryByName = async (name: string): Promise<Country | null> => {
     try {
-        const response = await api.get<Country[]>(`/name/${name}`);
+        const encodedName = encodeURIComponent(name);
+        const response = await api.get<Country[]>(`/name/${encodedName}`);
         // El endpoint /name siempre devuelve un array, así que devolvemos la primera coincidencia
         return response.data[0] || null;
     } catch (error) {

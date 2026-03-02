@@ -3,7 +3,7 @@ import { Country } from "./types";
 
 const api = axios.create({
     baseURL: "https://restcountries.com/v3.1/",
-    timeout: 5000,
+    timeout: 50000,
 });
 
 export const getAllCountries = async (): Promise<Country[]> => {

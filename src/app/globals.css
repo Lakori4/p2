@@ -157,3 +157,19 @@ a {
 .detailLanguages {
   margin-left: 1.25rem;
 }
+
+.backButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #3b83f636;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+

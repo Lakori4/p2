@@ -29,6 +29,7 @@ export default function CountryDetail({ country }: CountryDetailProps) {
             ))}
           </ul>
         </div>
+        <button className="backButton" onClick={() => window.history.back()}>Volver</button>
       </div>
     </div>
   );

@@ -19,12 +19,12 @@ export default function CountryDetail({ country }: CountryDetailProps) {
         alt={country.flags.alt || `Bandera de ${country.name.common}`}
         className="detailFlag"
       />
-      <h2 className="detailName">{country.name.common}</h2>
-      <p className="detailOfficial">{country.name.official}</p>
-      <p>{country.capital}</p>
-      <p>{country.region}</p>
-      <p>{country.population}</p>
-      <p>{Object.entries(idiomas).map(([sym, lang]) => (<div key={sym}>{lang}</div>) )}</p>
+      <p className="detailOfficial"> Nombre oficial:{country.name.official}</p>
+      <p>Capital: {country.capital}</p>
+      <p>Región: {country.region}</p>
+      <p>Población: {country.population.toLocaleString("es-ES")}</p>
+      <p>Idiomas: </p>
+      <p>{Object.entries(idiomas).map(([sym, lang]) => (<div key={sym}><ul>{lang}</ul></div>) )}</p>
     </div>
   )
 }

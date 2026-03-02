@@ -1,5 +1,6 @@
 'use client';
 import { getCountryByName } from "@/lib/api";
+import CountryDetail from "@/components/CountryDetail";
 import { Country } from "@/lib/types";
 import { AxiosError } from "axios";
 import { useParams } from "next/navigation";
@@ -35,12 +36,10 @@ const CountryDetailPage = () => {
     return(
         <div className="main">
             <h1 className="title">Detalle del país: {countryName}</h1>
+
             {!country && loading && <h2 className="loading">Loading...</h2>}
-            {country &&
-            (<>
-                <img src={country.flags.svg}/>
-                <h2>{country.name.common}</h2>
-            </>)}
+
+            {country && <CountryDetail country={country} />}
             {error && <h2 className="error">{error}</h2>}
         </div>
     )

@@ -115,3 +115,28 @@ a {
 .content {
   padding: 0.85rem 1rem 1rem;
 }
+
+.countryDetail {
+  max-width: 560px;
+  margin: 0 auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: var(--background);
+}
+
+.detailFlag {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.detailName {
+  font-size: 1.5rem;
+  margin: 1rem 1rem 0.25rem;
+}
+
+.detailOfficial {
+  margin: 0 1rem 1rem;
+  opacity: 0.8;
+}

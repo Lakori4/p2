@@ -5,6 +5,7 @@ import { Country } from "@/lib/types";
 import { AxiosError } from "axios";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 
 
@@ -36,6 +37,7 @@ const CountryDetailPage = () => {
     return(
         <div className="main">
             <h1 className="title">Detalle del país: {countryName}</h1>
+            <Link href="/"><button>Back</button></Link>
 
             {!country && loading && <h2 className="loading">Loading...</h2>}
 

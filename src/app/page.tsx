@@ -10,6 +10,7 @@ export default function Home() {
   const [busqueda, setBusqueda] = useState("")
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
+  const [search, setSearch]= useState<boolean>(false)
 
   useEffect(()=>{
     let isMounted = true;
@@ -45,7 +46,7 @@ export default function Home() {
       isMounted = false;
       clearTimeout(timeout);
     };
-  }, [busqueda]);
+  }, [search]);
 
   return (
     <div className="main">
@@ -60,6 +61,8 @@ export default function Home() {
           onChange={(e) => setBusqueda(e.target.value)} 
           className="searchInput"
         />
+
+        <button onClick={() => setSearch(!search)}>Buscar</button>
       </div>
 
       <div className="grid">

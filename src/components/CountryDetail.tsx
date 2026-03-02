@@ -24,7 +24,7 @@ export default function CountryDetail({ country }: CountryDetailProps) {
       <p>Región: {country.region}</p>
       <p>Población: {country.population.toLocaleString("es-ES")}</p>
       <p>Idiomas: </p>
-      <p>{Object.entries(idiomas).map(([sym, lang]) => (<div key={sym}><ul>{lang}</ul></div>) )}</p>
+      {Object.entries(idiomas).map(([sym, lang]) => (<div key={sym}><ul>{lang}</ul></div>) )}
     </div>
   )
 }

@@ -2,18 +2,25 @@
 import CountryCard from "@/components/CountryCard";
 import { getAllCountries } from "@/lib/api";
 import { Country } from "@/lib/types";
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 
 export default function Home() {
 
   const [countries, setCountries] = useState<Country[]|null>(null);
   const [busqueda, setBusqueda] = useState("")
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
 
   useEffect(()=>{
     getAllCountries().then((data)=>{
       setCountries(data)
-    })
-  }, []); // <--- El arreglo vacío evita un bucle infinito
+    }).catch((e:AxiosError)=>{
+            setError(e.message)
+        }).finally(()=>{
+            setLoading(false);
+        })
+  }, []); 
 
  const filter = countries?.filter((country)=>(country.name.common.toLowerCase().includes(busqueda.toLowerCase())))
 
@@ -30,8 +37,11 @@ export default function Home() {
       />
 
       <div>
-        {!countries ? (
+        
+        {loading ? (
           <p>Cargando países...</p>
+        ) : error ? (
+          <p>Error: {error}</p>
         ) : filter?.length === 0 ? (
           <p>No se encontraron resultados.</p>
         ) : (
@@ -44,3 +54,4 @@ export default function Home() {
     </div>
   );
 }
+

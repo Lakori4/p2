@@ -16,6 +16,21 @@ export const getAllCountries = async (): Promise<Country[]> => {
     }
 };
 
+export const searchCountriesByName = async (name: string): Promise<Country[]> => {
+    try {
+        const encodedName = encodeURIComponent(name);
+        const response = await api.get<Country[]>(`/name/${encodedName}?fields=name,flags`);
+        return response.data;
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response?.status === 404) {
+            return [];
+        }
+
+        console.error(`Error al buscar países por nombre (${name}):`, error);
+        return [];
+    }
+};
+
 
 export const getCountryByName = async (name: string): Promise<Country | null> => {
     try {

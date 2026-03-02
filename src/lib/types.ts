@@ -7,8 +7,8 @@ export type Country = {
         svg: string;
         alt?: string;
     };
-/*     capital?: string[];
+    capital?: string[];
     region: string;
     population: number;
-    languages?: Record<string, string>;*/
+    languages?: Record<string, string>;
 }

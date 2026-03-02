@@ -10,5 +10,5 @@ export type Country = {
     capital?: string[];
     region: string;
     population: number;
-    languages?: Record<string, string>;
+    languages: Record<string, string>;
 }

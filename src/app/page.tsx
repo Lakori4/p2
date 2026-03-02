@@ -1,28 +1,51 @@
 "use client"
 import CountryCard from "@/components/CountryCard";
-import { getAllCountries } from "@/lib/api";
+import { getAllCountries, searchCountriesByName } from "@/lib/api";
 import { Country } from "@/lib/types";
-import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 
 export default function Home() {
 
-  const [countries, setCountries] = useState<Country[]|null>(null);
+  const [countries, setCountries] = useState<Country[]>([]);
   const [busqueda, setBusqueda] = useState("")
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
   useEffect(()=>{
-    getAllCountries().then((data)=>{
-      setCountries(data)
-    }).catch((e:AxiosError)=>{
-            setError(e.message)
-        }).finally(()=>{
-            setLoading(false);
-        })
-  }, []); 
+    let isMounted = true;
 
- const filter = countries?.filter((country)=>(country.name.common.toLowerCase().includes(busqueda.toLowerCase())))
+    const fetchCountries = async () => {
+      setLoading(true);
+      setError("");
+
+      try {
+        const query = busqueda.trim();
+        const data = query
+          ? await searchCountriesByName(query)
+          : await getAllCountries();
+
+        if (isMounted) {
+          setCountries(data);
+        }
+      } catch (e) {
+        if (isMounted) {
+          setError(e instanceof Error ? e.message : "Error al buscar países.");
+          setCountries([]);
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    const timeout = setTimeout(fetchCountries, 350);
+
+    return () => {
+      isMounted = false;
+      clearTimeout(timeout);
+    };
+  }, [busqueda]);
 
   return (
     <div className="main">
@@ -45,10 +68,10 @@ export default function Home() {
           <p className="loading">Cargando países...</p>
         ) : error ? (
           <p className="error">Error: {error}</p>
-        ) : filter?.length === 0 ? (
+        ) : countries.length === 0 ? (
           <p className="noResults">No se encontraron resultados.</p>
         ) : (
-          filter?.map((country)=>(
+          countries.map((country)=>(
             <CountryCard key={country.name.common} country={country}></CountryCard>
           ))
         )}

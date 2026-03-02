@@ -9,25 +9,25 @@ import { useEffect, useState } from "react";
 
 const EstaRecibeId = () => {
 
-    const { id } = useParams();
+    const { name } = useParams();
 
     const [country, setCountry] = useState<Country|null>(null);
     const [error, setError] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(()=>{
-        getCountryByName(id as string).then((res)=>{
+        getCountryByName(name as string).then((res)=>{
             setCountry(res);
         }).catch((e:AxiosError)=>{
             setError(e.message)
         }).finally(()=>{
             setLoading(false);
         })
-    },[id]);
+    },[name]);
 
     return(
-        <div>
-            <h1>Esta es la que recibe el id y dicho id es: {id}</h1>
+        <div className="">
+            <h1>Esta es la que recibe el id y dicho id es: {name}</h1>
             {!country && loading && <h1>Loading...</h1>}
             {country &&
             (<>

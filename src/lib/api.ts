@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Country } from "./types";
 
-export const api = axios.create({
+const api = axios.create({
     baseURL: "https://restcountries.com/v3.1/",
     timeout: 5000,
 });

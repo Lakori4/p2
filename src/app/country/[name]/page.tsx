@@ -5,14 +5,15 @@ import { Country } from "@/lib/types";
 import { AxiosError } from "axios";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 
 
 
 const CountryDetailPage = () => {
 
     const { name } = useParams();
-    const countryName = Array.isArray(name) ? name[0] : name;
+    console.log(name)
+
+    const countryName = Array.isArray(name) ? name.join("") : name;
 
     const [country, setCountry] = useState<Country|null>(null);
     const [error, setError] = useState<string>("");
@@ -36,7 +37,7 @@ const CountryDetailPage = () => {
 
     return(
         <div className="main">
-            <h1 className="title">Detalle del país: {countryName}</h1>
+            <h1 className="title">Detalle del país: {country?.name.common}</h1>
 
             {!country && loading && <h2 className="loading">Loading...</h2>}
 
